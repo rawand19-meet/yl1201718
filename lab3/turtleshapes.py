@@ -1,9 +1,14 @@
-import turtle
-turtle.pendown()
-turtle.forward(120)
-turtle.left(50)
-turtle.right(60)
-turtle.left(50)
-turtle.penup()
 
+import turtle
+turtle.forward(150)
+turtle.right(144)
+turtle.forward(150)
+turtle.right(144)
+turtle.forward(150)
+turtle.right(144)
+turtle.forward(150)
+turtle.right(144)
+turtle.forward(150)
+turtle.right(144)
+turtle.forward(150)
 turtle.mainloop()
