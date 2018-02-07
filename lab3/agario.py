@@ -2,8 +2,12 @@ from turtle import *
 import turtle
 import time
 import random
+
 from ball import *
-turtle.bgcolor("black")
+
+score =0
+# turtle.write("score = " + str(score),font =("Ariel",40,"normal"))				
+turtle.bgcolor("pink")
 tracer(0)
 hideturtle()
 RUNNING=True 
@@ -12,16 +16,17 @@ SCREEN_WIDTH=turtle.getcanvas().winfo_width()/2
 SCREEN_HEIGHT=turtle.getcanvas().winfo_height()/2
 
 
-my_ball=Ball(100,0,5,10,100,"purple")
+my_ball=Ball(60,0,0,0,60,"purple")
 my_ball.goto(10,10)
 NUMBER_OF_BALLS=5
 MINIMUM_BALL_RADIUS = 10
-MAXIMUM_BALL_RADIUS = 100
+MAXIMUM_BALL_RADIUS = 80
 MINIMUM_BALL_DX = -1
 MAXIMUM_BALL_DX = 1
 MINIMUM_BALL_DY = -1
 MAXIMUM_BALL_DY = 1
 BALLS=[]
+
 for i in range (NUMBER_OF_BALLS):
 	x=random.randint(-SCREEN_WIDTH+MAXIMUM_BALL_RADIUS,SCREEN_WIDTH-MAXIMUM_BALL_RADIUS)
 	Y=random.randint(-SCREEN_HEIGHT+MAXIMUM_BALL_RADIUS,SCREEN_HEIGHT-MAXIMUM_BALL_RADIUS)
@@ -106,6 +111,10 @@ def check_myball_collision():
 			ball.shapesize(ball.r/10)
 			my_ball.r = my_ball.r+1
 			my_ball.shapesize(my_ball.r/10)
+			global score
+			score+=1
+			turtle.clear()
+			turtle.write("score = " + str(score),font =("Ariel",40,"normal"))	
 
 	return True
 
@@ -132,6 +141,16 @@ def movearound(event):
 turtle.getcanvas().bind("<Motion>",movearound)
 turtle.listen()
 
+# def timelimit():
+# 	starting_time = time.time()
+# 	time_limit = 10
+
+# 	if (time.time() - starting_time) < time_limit:
+# 		pass
+# 	else:
+# 		return False
+
+
 while RUNNING == True:
 	if (SCREEN_WIDTH!=getcanvas().winfo_width()/2 or SCREEN_HEIGHT!=getcanvas().winfo_height()/2):
 		SCREEN_WIDTH=turtle.getcanvas().winfo_width()/2
@@ -139,27 +158,41 @@ while RUNNING == True:
 		
 		RUNNING=check_myball_collision()
 		my_ball.move(SCREEN_HEIGHT,SCREEN_WIDTH)
+
+	
+
 	move_all_balls()
 	check_myball_collision()
 	check_all_balls_collision()
 	turtle.getscreen().update()
 	time.sleep(0.05)
 	
+	RUNNING =check_myball_collision()
+	#RUNNING=timelimit()
+	if RUNNING == False:
+		
+		penup()
+		turtle.goto(0,0)
+		turtle.clear()
+		turtle.write("Bye Bye" , move =False , align = "center", font =("Arial" , 50 ,"bold"))
+		
+mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 hideturtle()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
